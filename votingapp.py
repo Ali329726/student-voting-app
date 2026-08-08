@@ -41,3 +41,33 @@ def reset():
 if __name__ == "__main__":
     app.run(debug=True)
     
+@app.route("/reset")
+def reset():
+    votes.clear()
+    return jsonify({"message": "All votes have been reset"})
+@app.route("/reset")
+def reset():
+    votes.clear()
+    return jsonify({"message": "All votes have been reset"})
+@app.route("/results")
+def results():
+    return jsonify(votes)
+
+@app.route("/reset")
+def reset():
+    votes.clear()
+    return jsonify({"message": "All votes have been reset"})
+return
+@app.route("/")
+def home():
+    return """
+    <html>
+    <head>
+        <title>Student Voting App</title>
+    </head>
+    <body>
+        <h1>Student Voting Application</h1>
+        <p>Your application is running successfully! ✅</p>
+    </body>
+    </html>
+    """
