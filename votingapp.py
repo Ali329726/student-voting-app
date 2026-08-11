@@ -2,72 +2,43 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-# Store votes
+# Store votes in memory
 votes = {}
 
+
+# Task 1: Home endpoint
 @app.route("/")
 def home():
-    return """
-    <h1>Student Voting Application</h1>
-    <h3>Your application is running successfully! ✅</h3>
+    return "Welcome to the App"
 
-    <p><b>Available Endpoints:</b></p>
-    <ul>
-        <li>/health - Check application status</li>
-        <li>/vote/&lt;candidate&gt; - Cast a vote</li>
-        <li>/results - View voting results</li>
-        <li>/reset - Reset all votes</li>
-    </ul>
-    """
 
+# Task 1: Health endpoint
 @app.route("/health")
 def health():
-    return "Application is running successfully."
+    return "App is running"
 
+
+# Task 3: Vote endpoint
 @app.route("/vote/<candidate>")
 def vote(candidate):
     votes[candidate] = votes.get(candidate, 0) + 1
     return f"Vote recorded successfully for {candidate}"
 
+
+# Task 3: Results endpoint
 @app.route("/results")
 def results():
-    return jsonify(votes)
+    if not votes:
+        return "No votes recorded"
+    
+    return "\n".join(f"{candidate}: {count}" for candidate, count in votes.items())
 
+# Task 4: Reset endpoint
 @app.route("/reset")
 def reset():
     votes.clear()
-    return "All votes have been reset successfully."
+    return "All votes have been reset"
+
 
 if __name__ == "__main__":
     app.run(debug=True)
-    
-@app.route("/reset")
-def reset():
-    votes.clear()
-    return jsonify({"message": "All votes have been reset"})
-@app.route("/reset")
-def reset():
-    votes.clear()
-    return jsonify({"message": "All votes have been reset"})
-@app.route("/results")
-def results():
-    return jsonify(votes)
-
-@app.route("/reset")
-def reset():
-    votes.clear()
-    return jsonify({"message": "All votes have been reset"})
-return
-@app.route("/")
-def home():
-    return """
-    <html>
-    <head>
-        <title>Student Voting App</title>
-    </head>
-    <body>
-        <h1>Student Voting Application</h1>
-        <p>Your application is running successfully! ✅</p>
-    </body>
-    </html>
-    """
