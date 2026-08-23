@@ -14,7 +14,7 @@ Check Python:
 
 ```bash
 python --version
-nstall Flask
+install Flask
 pip install flask
 Run the Application
 python votingapp.py
